@@ -1,0 +1,23 @@
+
+import tensorflow as tf
+import cv2
+import matplotlib.pyplot as plt
+
+!git clone https://github.com/AlexeyAB/darknet
+ls
+cd darknet
+ls
+!sed -i 's/OPENCV=0/OPENCV=1/' Makefile
+!sed -i 's/GPU=0/GPU=1/' Makefile
+!sed -i 's/CUDNN=0/CUDNN=1/' Makefile
+!make
+!wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.weights
+!./darknet detect cfg/yolov4.cfg yolov4.weights data/eagle.jpg
+def mostrar (frame):
+	imagem = cv2.imread(frame)
+	fig = plt.gcf()
+	fig.set_size_inches(18,10)
+	plt.axis('off')
+	plt.imshow(cv2.cvtColor(imagem, cv2.COLOR_BGR2RGB))
+	plt.show()
+mostrar('predictions.jpg')
